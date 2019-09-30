@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">小慕餐馆</string>
+    <string name="skip">跳过</string>
+    <string name="imooc_restaurant">小 慕 餐 馆</string>
+    <string name="username_hint">请输入账号</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="login">登 录</string>
+    <string name="phoneNumber_register">手机注册</string>
+</resources>
