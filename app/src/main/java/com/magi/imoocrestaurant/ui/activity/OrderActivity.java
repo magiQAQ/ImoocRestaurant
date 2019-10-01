@@ -1,6 +1,6 @@
 package com.magi.imoocrestaurant.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.magi.imoocrestaurant.R;
