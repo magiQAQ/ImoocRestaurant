@@ -6,4 +6,7 @@
     <string name="password_hint">请输入密码</string>
     <string name="login">登 录</string>
     <string name="phoneNumber_register">手机注册</string>
+    <string name="register_hint">请输入手机号</string>
+    <string name="repassword_hint">重复输入密码</string>
+    <string name="submit">提 交</string>
 </resources>

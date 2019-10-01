@@ -23,7 +23,9 @@
         android:textColorHint="@android:color/black"
         android:textSize="24sp"
         android:padding="10dp"
-        tools:ignore="Autofill" />
+        android:autofillHints="phone"
+        android:importantForAutofill="yes"
+        />
 
     <EditText
         android:id="@+id/password_editText"
@@ -38,7 +40,7 @@
         android:textColorHint="@android:color/black"
         android:textSize="24sp"
         android:padding="10dp"
-        tools:ignore="Autofill" />
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/repassword_editText"
@@ -53,8 +55,8 @@
         android:textColorHint="@android:color/black"
         android:textSize="24sp"
         android:padding="10dp"
-        tools:ignore="Autofill" />
-    
+        android:importantForAutofill="no" />
+
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
