@@ -1,6 +1,7 @@
 package com.magi.imoocrestaurant.net;
 
-import com.google.gson.Gson;
+import com.google.gson.internal.$Gson$Types;
+import com.magi.imoocrestaurant.utils.GsonUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -16,24 +17,28 @@ public abstract class CommonCallback<T> extends StringCallback {
     private Type type;
 
     public CommonCallback(){
-        Class<? extends CommonCallback> clazz = getClass();
-        //返回包含泛型参数的超类
-        Type genericSuperclass = clazz.getGenericSuperclass();
-        if (type instanceof Class){//说明没有给泛型
-            throw new RuntimeException("Miss Type Params");
-        }
-
-        //参数化类型
-        ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
-        if (parameterizedType != null) {
-            this.type = parameterizedType.getActualTypeArguments()[0];
-        }
+        type = getSuperclassTypeParameter(getClass());
     }
+
+    private static Type getSuperclassTypeParameter(Class<?> subclass) {
+        //返回包含泛型参数的超类
+        Type superclass = subclass.getGenericSuperclass();
+        if (superclass instanceof Class) {//说明没有给泛型
+            throw new RuntimeException("Missing type parameter.");
+        }
+        //参数化类型
+        ParameterizedType parameterized = (ParameterizedType) superclass;
+        return $Gson$Types.canonicalize(parameterized.getActualTypeArguments()[0]);
+    }
+
 
     @Override
     public void onError(Call call, Exception e, int id) {
         onFail(e);
     }
+
+    public abstract void onFail(Exception e);
+    public abstract void onSuccess(T response);
 
     @Override
     public void onResponse(String response, int id) {
@@ -42,8 +47,7 @@ public abstract class CommonCallback<T> extends StringCallback {
             int resultCode = jsonObject.getInt("resultCode");
             if(resultCode==1){
                 String data = jsonObject.getString("data");
-                Gson gson = new Gson();
-                onSuccess(gson.<T>fromJson(data,type));
+                onSuccess(GsonUtils.getGson().<T>fromJson(data,type));
             } else {
                 onFail(new RuntimeException(jsonObject.getString("resultMessage")));
             }
@@ -53,7 +57,6 @@ public abstract class CommonCallback<T> extends StringCallback {
         }
     }
 
-    abstract void onFail(Exception e);
-    abstract void onSuccess(T response);
+
 
 }
