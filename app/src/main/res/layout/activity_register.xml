@@ -11,12 +11,12 @@
     <include layout="@layout/common_toolbar" />
 
     <EditText
-        android:id="@+id/phone_editText"
+        android:id="@+id/username_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="#ffffff"
-        android:inputType="phone"
+        android:inputType="textPersonName"
         android:hint="@string/register_hint"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"

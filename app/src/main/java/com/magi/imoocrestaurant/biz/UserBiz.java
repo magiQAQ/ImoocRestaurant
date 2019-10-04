@@ -5,11 +5,13 @@ import com.magi.imoocrestaurant.config.Config;
 import com.magi.imoocrestaurant.net.CommonCallback;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import java.io.File;
+
 public class UserBiz {
 
     public void login(String username, String password, CommonCallback<User> commonCallback){
         OkHttpUtils.post()
-                .url(Config.baseUrl + "user_login")
+                .url(Config.baseUrl + File.separator + "user_login")
                 .tag(this)
                 .addParams("username", username)
                 .addParams("password", password)
@@ -19,7 +21,7 @@ public class UserBiz {
 
     public void register(String username, String password, CommonCallback<User> commonCallback){
         OkHttpUtils.post()
-                .url(Config.baseUrl + "user_register")
+                .url(Config.baseUrl + File.separator + "user_register")
                 .tag(this)
                 .addParams("username", username)
                 .addParams("password", password)

@@ -18,7 +18,7 @@ public class SharedPreferencesUtils {
     /**
      * 保存在手机里面的文件名
      */
-    public String mFileName = "share_data";
+    private String mFileName = "share_data";
 
     private SharedPreferencesUtils(Context context, String fileName) {
 

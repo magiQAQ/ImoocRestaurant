@@ -1,17 +1,14 @@
 package com.magi.imoocrestaurant.ui.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.magi.imoocrestaurant.R;
 import com.magi.imoocrestaurant.UserInfoHolder;
@@ -19,17 +16,20 @@ import com.magi.imoocrestaurant.bean.User;
 import com.magi.imoocrestaurant.biz.UserBiz;
 import com.magi.imoocrestaurant.net.CommonCallback;
 import com.magi.imoocrestaurant.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
 
-import okhttp3.Call;
+public class LoginActivity extends BaseActivity {
 
-public class LoginActivity extends AppCompatActivity {
-
+    public static final int RegisterActivity_REQUEST_CODE = 1;
     private UserBiz userBiz = new UserBiz();
 
     private EditText username_editText, password_editText;
     private Button login_button;
     private TextView register_textView;
-    private ProgressDialog progressDialog;
+
+    public static final String KEY_USERNAME = "key_username";
+    public static final String KEY_PASSWORD = "key_password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,26 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initView();
-
         initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //清空cookie
+        CookieJarImpl cookieJar = (CookieJarImpl) OkHttpUtils.getInstance().getOkHttpClient().cookieJar();
+        cookieJar.getCookieStore().removeAll();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==RegisterActivity_REQUEST_CODE && resultCode ==RegisterActivity.RESULT_CODE && data!=null){
+            String username = data.getStringExtra(KEY_USERNAME);
+            String password = data.getStringExtra(KEY_PASSWORD);
+            username_editText.setText(username);
+            password_editText.setText(password);
+        }
     }
 
     private void initView() {
@@ -88,18 +106,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void startLoadingProgress() {
-        if (progressDialog != null) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("加载中...");
-        }
-    }
-
-    private void stopLoadingProgress() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
 
     private void toOrderActivity() {
         startActivity(new Intent(this, OrderActivity.class));
@@ -107,6 +113,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void toRegisterActivity() {
-        startActivity(new Intent(this, RegisterActivity.class));
+        startActivityForResult(new Intent(this, RegisterActivity.class), RegisterActivity_REQUEST_CODE);
     }
 }
