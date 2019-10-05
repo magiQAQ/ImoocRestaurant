@@ -59,6 +59,12 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        userBiz.onDestroy();
+    }
+
     private void initView() {
         username_editText = findViewById(R.id.username_editText);
         password_editText = findViewById(R.id.password_editText);

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/item_bg"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
+
+    <ImageView
+        android:id="@+id/item_order_imageView"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/item_image"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@null"/>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/item_order_imageView"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        >
+
+        <TextView
+            android:id="@+id/item_order_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            tools:text="餐厅名字"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/item_order_description_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginTop="2dp"
+            tools:text="餐厅名字餐厅名字餐厅名字餐厅名字餐厅名字"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_order_price_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/item_order_imageView"
+        android:layout_toEndOf="@id/item_order_imageView"
+        tools:text="30元"
+        android:layout_marginStart="8dp"
+        android:textColor="#fd8f50" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444444"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

@@ -9,4 +9,8 @@
     <string name="register_hint">请输入用户名</string>
     <string name="repassword_hint">重复输入密码</string>
     <string name="submit">提 交</string>
+    <string name="my_order">我的订单</string>
+    <string name="go_order">点餐</string>
+    <string name="count0">数量:0</string>
+    <string name="pay0yuan">0元 立即支付</string>
 </resources>
