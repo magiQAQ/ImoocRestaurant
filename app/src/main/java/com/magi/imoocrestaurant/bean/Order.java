@@ -22,6 +22,24 @@ public class Order implements Serializable{
     private float price;
     private List<ProductVo> ps;
 
+    public void addProduct(Product product){
+        Integer count = productMap.get(product);
+        if (count==null ||count <= 0){
+            productMap.put(product,1);
+        } else {
+            productMap.put(product,count+1);
+        }
+    }
+
+    public void removeProduct(Product product){
+        Integer count = productMap.get(product);
+        if (count==null ||count <= 0){
+            return;
+        } else {
+            productMap.put(product, count - 1);
+        }
+    }
+
     public int getId() {
         return id;
     }

@@ -42,14 +42,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
         Glide.with(mContext)
                 .load(Config.baseUrl+order.getRestaurant().getIcon())
                 .placeholder(R.drawable.pictures_no)
-                .into(holder.item_order_imageView);
-        holder.item_order_name_textView.setText(order.getRestaurant().getName());
-        holder.item_order_price_textView.setText("共消费"+order.getPrice()+"元");
+                .into(holder.icon_imageView);
+        holder.restaurant_name_textView.setText(order.getRestaurant().getName());
+        holder.price_textView.setText("共消费"+order.getPrice()+"元");
         if (order.getPs().size()>0) {
-            holder.item_order_description_textView
+            holder.description_textView
                     .setText(order.getPs().get(0).product.getName()+"等"+order.getCount()+"件商品");
         } else {
-            holder.item_order_description_textView.setText("无消费");
+            holder.description_textView.setText("无消费");
         }
     }
 
@@ -60,8 +60,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
 
     public class OrderItemViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView item_order_imageView;
-        private TextView item_order_name_textView,item_order_description_textView,item_order_price_textView;
+        private ImageView icon_imageView;
+        private TextView restaurant_name_textView, description_textView, price_textView;
 
 
         public OrderItemViewHolder(@NonNull View itemView) {
@@ -73,10 +73,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
                 }
             });
 
-            item_order_imageView = itemView.findViewById(R.id.item_order_imageView);
-            item_order_name_textView = itemView.findViewById(R.id.item_order_name_textView);
-            item_order_description_textView = itemView.findViewById(R.id.item_order_description_textView);
-            item_order_price_textView = itemView.findViewById(R.id.item_order_price_textView);
+            icon_imageView = itemView.findViewById(R.id.icon_imageView);
+            restaurant_name_textView = itemView.findViewById(R.id.restaurant_name_textView);
+            description_textView = itemView.findViewById(R.id.description_textView);
+            price_textView = itemView.findViewById(R.id.price_textView);
         }
     }
 }

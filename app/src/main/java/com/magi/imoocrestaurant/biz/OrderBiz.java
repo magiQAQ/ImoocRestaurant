@@ -14,7 +14,8 @@ public class OrderBiz {
     public void listByPage(int currentPage, CommonCallback<List<Order>> commonCallback) {
         OkHttpUtils.post()
                 .url(Config.baseUrl + File.separator + "order_find")
-                .addParams("currentPage", currentPage + "")
+                .addParams("currentPage", String.valueOf(currentPage))
+                .tag(this)
                 .build()
                 .execute(commonCallback);
     }
@@ -24,8 +25,10 @@ public class OrderBiz {
         StringBuilder stringBuilder = new StringBuilder();
         Map<Product, Integer> productMap = order.productMap;
         for (Product p : productMap.keySet()) {
-            stringBuilder.append(p.getId()).append("_").append(productMap.get(p));
-            stringBuilder.append("|");
+            stringBuilder.append(p.getId())
+                    .append("_")
+                    .append(productMap.get(p))
+                    .append("|");
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 

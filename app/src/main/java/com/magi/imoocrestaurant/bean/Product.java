@@ -3,13 +3,15 @@ package com.magi.imoocrestaurant.bean;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private int id;
-    private String name;
-    private String label;
-    private String description;
-    private String icon;
-    private float price;
-    private Restaurant restaurant;
+    protected int id;
+    protected String name;
+    protected String label;
+    protected String description;
+    protected String icon;
+    protected float price;
+    protected Restaurant restaurant;
+
+
 
     public int getId() {
         return id;

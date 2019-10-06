@@ -3,11 +3,13 @@ package com.magi.imoocrestaurant.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +58,30 @@ public class OrderActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         orderBiz.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            loadData();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            try {
+                Intent home = new Intent(Intent.ACTION_MAIN);
+                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                home.addCategory(Intent.CATEGORY_HOME);
+                startActivity(home);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initView() {
@@ -114,7 +140,7 @@ public class OrderActivity extends BaseActivity {
 
     private void loadData() {
         startLoadingProgress();
-        orderBiz.listByPage(1, new CommonCallback<List<Order>>() {
+        orderBiz.listByPage(0, new CommonCallback<List<Order>>() {
             @Override
             public void onFail(Exception e) {
                 stopLoadingProgress();
@@ -124,7 +150,6 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onSuccess(List<Order> response) {
                 stopLoadingProgress();
-                mCurrentPage = 0;
                 ToastUtils.showToast("订单更新成功");
                 mList.clear();
                 mList.addAll(response);
@@ -143,7 +168,13 @@ public class OrderActivity extends BaseActivity {
             public void onFail(Exception e) {
                 stopLoadingProgress();
                 ToastUtils.showToast(e.getMessage());
+                swipeRefreshLayout.setPullUpRefreshing(false);
                 mCurrentPage--;
+
+                String message = e.getMessage();
+                if (message.contains("用户未登录")) {
+                    toLoginActivity();
+                }
             }
 
             @Override

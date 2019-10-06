@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:contentDescription="@null"/>
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,11 +27,11 @@
         >
 
         <TextView
-            android:id="@+id/restaurant_name_textView"
+            android:id="@+id/product_name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            tools:text="餐厅名字"
+            tools:text="菜名"
             android:textSize="18sp"
             android:textStyle="bold"
             />
@@ -54,8 +54,41 @@
         android:layout_alignBottom="@id/icon_imageView"
         android:layout_toEndOf="@id/icon_imageView"
         tools:text="30元"
+        android:maxLines="1"
+        android:layout_toStartOf="@id/add_imageView"
         android:layout_marginStart="8dp"
         android:textColor="#fd8f50" />
+
+    <ImageView
+        android:id="@+id/sub_imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/icon_imageView"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/sub"
+        android:contentDescription="@null"
+        />
+
+    <TextView
+        android:id="@+id/count_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/sub_imageView"
+        android:layout_alignBottom="@id/icon_imageView"
+        tools:text="2"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"/>
+
+    <ImageView
+        android:id="@+id/add_imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/icon_imageView"
+        android:layout_toStartOf="@id/count_textView"
+        android:src="@drawable/add"
+        android:contentDescription="@null"
+        />
 
     <View
         android:layout_width="match_parent"

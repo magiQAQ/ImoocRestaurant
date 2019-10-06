@@ -1,5 +1,7 @@
 package com.magi.imoocrestaurant.net;
 
+import android.util.Log;
+
 import com.google.gson.internal.$Gson$Types;
 import com.magi.imoocrestaurant.utils.GsonUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -52,6 +54,7 @@ public abstract class CommonCallback<T> extends StringCallback {
                 onFail(new RuntimeException(jsonObject.getString("resultMessage")));
             }
         } catch (JSONException e) {
+            Log.i("json",response);
             onFail(e);
             e.printStackTrace();
         }
