@@ -1,6 +1,7 @@
 package com.magi.imoocrestaurant.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.magi.imoocrestaurant.R;
 import com.magi.imoocrestaurant.bean.ProductModel;
 import com.magi.imoocrestaurant.config.Config;
+import com.magi.imoocrestaurant.ui.activity.ProductDetailActivity;
 import com.magi.imoocrestaurant.utils.ToastUtils;
 
 import java.io.File;
@@ -83,8 +85,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 2019/10/6 商品详情页
-
+                    Intent intent = new Intent(mContext, ProductDetailActivity.class);
+                    intent.putExtra(ProductDetailActivity.KEY_PRODUCT,mList.get(getLayoutPosition()));
+                    mContext.startActivity(intent);
                 }
             });
 

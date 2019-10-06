@@ -158,6 +158,11 @@ public class ProductListActivity extends BaseActivity {
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+
+                String message = e.getMessage();
+                if (message.contains("用户未登录")) {
+                    toLoginActivity();
+                }
             }
 
             @Override
@@ -192,6 +197,11 @@ public class ProductListActivity extends BaseActivity {
                 ToastUtils.showToast(e.getMessage());
                 currentPage--;
                 swipeRefreshLayout.setPullUpRefreshing(false);
+
+                String message = e.getMessage();
+                if (message.contains("用户未登录")) {
+                    toLoginActivity();
+                }
 
             }
 

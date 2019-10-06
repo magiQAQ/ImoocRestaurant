@@ -145,6 +145,11 @@ public class OrderActivity extends BaseActivity {
             public void onFail(Exception e) {
                 stopLoadingProgress();
                 ToastUtils.showToast(e.getMessage());
+
+                String message = e.getMessage();
+                if (message.contains("用户未登录")) {
+                    toLoginActivity();
+                }
             }
 
             @Override

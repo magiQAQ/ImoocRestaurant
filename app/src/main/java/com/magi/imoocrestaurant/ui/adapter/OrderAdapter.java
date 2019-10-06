@@ -2,6 +2,7 @@ package com.magi.imoocrestaurant.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.magi.imoocrestaurant.R;
 import com.magi.imoocrestaurant.bean.Order;
 import com.magi.imoocrestaurant.config.Config;
+import com.magi.imoocrestaurant.ui.activity.OrderDetailActivity;
 
 import java.util.List;
 
@@ -69,7 +71,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderItemVie
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 2019/10/5
+                    Intent intent = new Intent(mContext, OrderDetailActivity.class);
+                    intent.putExtra(OrderDetailActivity.KEY_ORDER,mList.get(getLayoutPosition()));
+                    mContext.startActivity(intent);
                 }
             });
 
