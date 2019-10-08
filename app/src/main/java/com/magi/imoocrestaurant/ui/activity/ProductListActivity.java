@@ -183,6 +183,7 @@ public class ProductListActivity extends BaseActivity {
 
                 count_textView.setText(String.format("数量:%s", mTotalCount));
                 pay_button.setText(String.format("%s元 立刻支付", mTotalPrice));
+
             }
         });
 
